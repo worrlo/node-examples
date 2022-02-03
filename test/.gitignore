@@ -1,0 +1,4 @@
+.DS_Store
+www/user_files/*
+node_modules
+package-lock.json

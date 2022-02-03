@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Home</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/upload.html">File upload</a></li>
+        </ul>
+    </nav>
+    <h3>Login</h3>
+    <select name="method" >
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+    </select>
+    <form action="/process" >
+        <label for="first_name">First Name:</label><input type="text" name="first_name" size="50"/><br>
+        <label for="last_name">Last Name:</label><input type="text" name="last_name" size="50"/><br>
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+<script>
+    "use strict";
+    const method = document.querySelector("select[name=method]");
+    const form = document.querySelector("form");
+
+    method.addEventListener("change", (event) => {
+        const self = event.target;
+        console.log("index: %s, value: %s", self.selectedIndex, self.value);
+        form.method = self.value;
+    });
+    method.dispatchEvent(new Event("change"));
+</script>
+</html>
