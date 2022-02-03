@@ -16,6 +16,10 @@ function respond(res, data) {
     res.end(JSON.stringify(data));
 }
 
+fs.mkdir('./www/user_files', {recursive:true}, (err) => {
+    if (err) console.log( err );
+})
+
 app.get('/process', (req, res) => {
     respond(res, {
         first_name: req.query.first_name,
