@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Test</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/upload.html">File upload</a></li>
+        </ul>
+    </nav>
+</body>
+<script>
+    "use strict";
+    const post = (message) => {
+        fetch("/log", {
+            method: 'post',
+            body: JSON.stringify({entry: message}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+    };
+    const wait = (ms) => {
+        const end = Date.now() + ms;
+        while (Date.now() < end) continue;
+    };
+
+    document.onreadystatechange = (event) => {post(event.type + ":" + document.readyState);};
+    window.onbeforeunload = (event) => {
+        //event.preventDefault();
+        post("beforeunload");
+        //event.returnValue = "beforeunload";
+        wait(500);
+        //return "beforeunload";
+    };
+    window.onunload = (event) => {
+        //event.preventDefault();
+        post("unload");
+        //event.returnValue = "unload";
+        wait(500);
+        //return "unload";
+    };
+</script>
+</html>

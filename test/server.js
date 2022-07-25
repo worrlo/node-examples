@@ -10,6 +10,7 @@ const upload = multer({dest: './tmp'});
 
 app.use(express.static('www'));
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json({type: "application/json"}));
 
 function respond(res, data) {
     console.log(data);
@@ -25,6 +26,10 @@ app.get('/process', (req, res) => {
         first_name: req.query.first_name,
         last_name: req.query.last_name
     });
+});
+
+app.post('/log', (req,res) => {
+    respond(res, {message: req.body.entry});   
 });
 
 app.post('/process', (req, res) => {
@@ -66,4 +71,4 @@ app.post('/upload', upload.single('file'), (req, res) => {
 const server = app.listen(8080, () => {
     const addr = server.address();
     console.log("App running on %s:%s", addr.address, addr.port);
-})
+});
