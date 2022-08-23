@@ -19,17 +19,17 @@ function respond(res, data) {
 
 fs.mkdir('./www/user_files', {recursive:true}, (err) => {
     if (err) console.log( err );
-})
+});
+
+app.post('/log', (req,res) => {
+    respond(res, {message: req.body.entry});   
+});
 
 app.get('/process', (req, res) => {
     respond(res, {
         first_name: req.query.first_name,
         last_name: req.query.last_name
     });
-});
-
-app.post('/log', (req,res) => {
-    respond(res, {message: req.body.entry});   
 });
 
 app.post('/process', (req, res) => {
